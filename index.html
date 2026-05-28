@@ -8,7 +8,7 @@
       content="Mobile price list for Yonex x Jimmy's Badminton Shop in London."
     />
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./src/styles.css?v=20260529b" />
+    <link rel="stylesheet" href="./src/styles.css?v=20260529q" />
     <title>Jimmy's Badminton Shop</title>
   </head>
   <body>
@@ -24,8 +24,8 @@
         closeSoundSrc: "./assets/SQB.mp4",
         profileTapSoundSrc: "./assets/jimmy-head-sound.mp3",
         profileImages: {
-          heroBackgroundSrc: "./assets/jimmy-hero-bg.jpg?v=20260528b",
-          heroPersonSrc: "./assets/jimmy-hero-source.jpg?v=20260529c",
+          heroBackgroundSrc: "./assets/jimmy-hero-source.jpg?v=20260529h",
+          heroPersonSrc: "./assets/jimmy-hero-source.jpg?v=20260529j",
           heroSourceSrc: "./assets/jimmy-hero-source.jpg",
           galleryImages: [
             { src: "./assets/jimmy-gallery-03.jpg?v=20260528b", alt: "Jimmy Xie campus selfie" },
@@ -41,7 +41,7 @@
         },
         teamImages: [
           "./assets/team-avatar-01.jpg?v=20260528a",
-          "./assets/team-avatar-02.jpg?v=20260528a",
+          "./assets/team-harvey.jpg?v=20260529m",
           "./assets/team-avatar-03.webp?v=20260528a",
           "./assets/team-avatar-04.jpg?v=20260528a"
         ]
@@ -119,7 +119,7 @@
         {
           id: "yonex-bgxb68",
           brand: "YONEX",
-          name: "Yonex BGXB68",
+          name: "Yonex EXB68",
           gauge: "0.68 mm",
           features: "Durable hard string with excellent tension retention.",
           badge: "Retention",
@@ -128,7 +128,7 @@
         {
           id: "yonex-bgxb63",
           brand: "YONEX",
-          name: "Yonex BGXB63",
+          name: "Yonex EXB63",
           gauge: "0.63 mm",
           features: "Super-repulsion string, firm feel, crisp sound, and very slow tension loss.",
           badge: "Repulsion",
@@ -155,9 +155,9 @@
           ]
         },
         {
-          id: "victor-vbs-66n",
+          id: "victor-vbs66n",
           brand: "VICTOR",
-          name: "Victor VBS-66 Nano",
+          name: "Victor VBS66N",
           gauge: "0.66 mm",
           features: "High-repulsion string with a crisp hitting feel.",
           badge: "Control",
@@ -172,8 +172,20 @@
           ]
         },
         {
+          id: "yonex-exb65",
+          brand: "YONEX",
+          name: "Yonex EXB65",
+          gauge: "0.65 mm",
+          features: "Ultra-repulsion string with slow tension loss, crisp sound, and high durability.",
+          badge: "Repulsion",
+          colorOptions: [
+            { name: "White", basePriceCny: 70 },
+            { name: "Fluorescent Yellow", basePriceCny: 70 }
+          ]
+        },
+        {
           id: "bring-your-own-string",
-          name: "Bring your own string",
+          name: "Bring your\nown string",
           gauge: "",
           features: "",
           serviceOnly: true,
@@ -181,7 +193,7 @@
         }
       ];
 
-      const priorityStringIds = ["yonex-bg80", "yonex-bgxb63", "yonex-bg80p", "victor-vbs-66n"];
+      const priorityStringIds = ["yonex-bg80", "yonex-bgxb63", "yonex-bg80p", "victor-vbs66n", "yonex-exb65"];
       const pageOrder = ["prices", "profile", "sponsor"];
       const orderedStringCatalog = [...stringCatalog].sort((a, b) => {
         const aIndex = priorityStringIds.indexOf(a.id);
@@ -229,7 +241,7 @@
           profileIntroStart: "A Yonex S-tier stringer who has served over 10,000 customers, including ",
           profileIntroNames: "Lin Dan, Viktor Axelsen, Harvey Jiang, and Kento Momota",
           profileIntroEnd:
-            ". He was borned in Hunan and raised in Shenzhen, now he is under the guidance of Liu Xin.",
+            ". He has served over 10,000 clients, including top professionals. Born in Hunan, raised in Shenzhen, now under the guidance of Liu Xin.",
           sponsorEyebrow: "MEET THE TEAM",
           sponsorTitle: "Team members",
           sponsorBody: "This page is reserved for future shop members, partners, and team introductions.",
@@ -274,7 +286,7 @@
           galleryEyebrow: "照片",
           profileIntroStart: "尤尼克斯S级穿线师，曾为",
           profileIntroNames: "林丹、安塞龙、顺德林丹和桃田贤斗",
-          profileIntroEnd: "穿线，服务超10000+客户，广受好评。生于湖南，长于深圳，目前师从刘鑫。",
+          profileIntroEnd: "穿线，服务超10,000名客户，广受好评。生于湖南，长于深圳，目前师从刘鑫。",
           sponsorEyebrow: "我们的团队",
           sponsorTitle: "团队成员",
           sponsorBody: "这里预留给之后添加店内其他成员、合作伙伴和团队介绍。",
@@ -299,12 +311,16 @@
         "yonex-bg80": { en: "Medium-repulsion string with a firm hitting feel", zh: "中弹线，打感硬朗" },
         "yonex-bg80p": { en: "High-repulsion string with a firm hitting feel", zh: "高弹线，打感硬朗" },
         "yonex-bgxb68": { en: "Durable hard string with excellent tension retention", zh: "耐打线，保磅表现优秀" },
+        "yonex-exb65": {
+          en: "Ultra-repulsion string with slow tension loss, crisp sound, and high durability",
+          zh: "超弹线，掉磅慢，声音清脆，耐打度高"
+        },
         "yonex-bgxb63": {
           en: "Super-repulsion string, firm feel, crisp sound, and strong tension retention",
           zh: "超弹线，打感硬朗，声音清脆，保磅出色"
         },
         "yonex-bgab": { en: "Super-repulsion string with a polished, premium feel", zh: "超弹线，手感完美" },
-        "victor-vbs-66n": { en: "High-repulsion string with a crisp hitting feel", zh: "高弹线，打感清脆" }
+        "victor-vbs66n": { en: "High-repulsion string with a crisp hitting feel", zh: "高弹线，打感清脆" }
         ,
         "bring-your-own-string": { en: "Labour fee for customer-supplied string", zh: "客户自带线，仅收手工费" }
       };
@@ -455,7 +471,7 @@
             profileTapSound.volume = 0.92;
           }
 
-          for (let index = 0; index < 3; index += 1) {
+          for (let index = 0; index < 1; index += 1) {
             if (token !== profileTapPlayToken) return;
 
             await new Promise((resolve, reject) => {
@@ -626,7 +642,18 @@
                     <div class="gallery-rail">
                       <div class="gallery-track">
                         ${[...shopConfig.profileImages.galleryImages, ...shopConfig.profileImages.galleryImages]
-                          .map((image, index) => `<img src="${image.src}" alt="${image.alt}" />`)
+                          .map((image, index) => {
+                            const cleanSrc = image.src.split('?')[0];
+                            const filename = cleanSrc.split('/').pop();
+                            return `<div class="gallery-img-wrap" data-gallery-index="${index % shopConfig.profileImages.galleryImages.length}">
+                              <img src="${image.src}" alt="${image.alt}" />
+                              <button class="download-btn" type="button" aria-label="Download image" data-download-src="${cleanSrc}" data-download-filename="${filename}">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                  <path d="M12 2v14m0 0l-5-5m5 5l5-5M4 22h16"/>
+                                </svg>
+                              </button>
+                            </div>`;
+                          })
                           .join("")}
                       </div>
                     </div>
@@ -733,6 +760,149 @@
         });
 
         appShell.querySelector("[data-profile-sound]")?.addEventListener("click", playProfileTapSoundTriple);
+
+        bindGalleryTouch();
+      }
+
+      function bindGalleryTouch() {
+        const track = appShell.querySelector(".gallery-track");
+        if (!track) return;
+
+        const wraps = appShell.querySelectorAll(".gallery-img-wrap");
+        let longPressTimer = null;
+        let touchStartTarget = null;
+
+        // 触摸开始：暂停轮播
+        function handleTouchStart(event) {
+          track.classList.add("paused");
+          touchStartTarget = event.target.closest(".gallery-img-wrap");
+
+          // 长按检测：600ms 后显示下载按钮
+          longPressTimer = window.setTimeout(() => {
+            longPressTimer = null;
+            // 隐藏所有其他下载按钮
+            wraps.forEach((wrap) => wrap.classList.remove("show-download"));
+            if (touchStartTarget) {
+              touchStartTarget.classList.add("show-download");
+            }
+          }, 600);
+        }
+
+        // 触摸结束：恢复轮播，清除长按计时器
+        function handleTouchEnd() {
+          track.classList.remove("paused");
+          if (longPressTimer !== null) {
+            window.clearTimeout(longPressTimer);
+            longPressTimer = null;
+          }
+        }
+
+        // 移动到其他元素时取消长按
+        function handleTouchMove() {
+          if (longPressTimer !== null) {
+            window.clearTimeout(longPressTimer);
+            longPressTimer = null;
+          }
+        }
+
+        wraps.forEach((wrap) => {
+          wrap.addEventListener("touchstart", handleTouchStart, { passive: true });
+          wrap.addEventListener("touchend", handleTouchEnd, { passive: true });
+          wrap.addEventListener("touchmove", handleTouchMove, { passive: true });
+          wrap.addEventListener("touchcancel", handleTouchEnd, { passive: true });
+
+          // 下载按钮点击事件
+          const btn = wrap.querySelector(".download-btn");
+          if (btn) {
+            btn.addEventListener("click", (event) => {
+              event.stopPropagation();
+              const src = btn.dataset.downloadSrc;
+              const filename = btn.dataset.downloadFilename;
+              if (!src) return;
+
+              const link = document.createElement("a");
+              link.href = src;
+              link.download = filename || "gallery-image";
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+
+              // 下载后隐藏按钮
+              window.setTimeout(() => {
+                wrap.classList.remove("show-download");
+              }, 1200);
+            });
+          }
+        });
+
+        // 点击页面其他区域隐藏所有下载按钮
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".gallery-img-wrap")) {
+            wraps.forEach((wrap) => wrap.classList.remove("show-download"));
+          }
+        }, { passive: true });
+      }
+
+      function showQrModal() {
+        const qrLayer = document.createElement("div");
+        qrLayer.className = "qr-layer";
+        qrLayer.setAttribute("role", "dialog");
+        qrLayer.setAttribute("aria-modal", "true");
+        qrLayer.innerHTML = `
+          <button class="qr-backdrop" type="button" aria-label="Close QR"></button>
+          <div class="qr-sheet">
+            <div class="qr-wrap" data-qr-wrap>
+              <img src="./assets/payment-qr.jpg?v=20260529o" alt="Payment QR code" />
+              <button class="qr-download-btn" type="button" aria-label="Download QR code">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
+            <p class="qr-hint">${language === "zh" ? "长按保存二维码" : "Long press to save QR code"}</p>
+          </div>
+        `;
+
+        const closeQr = () => {
+          qrLayer.classList.add("closing");
+          setTimeout(() => qrLayer.remove(), 280);
+        };
+
+        qrLayer.querySelector(".qr-backdrop").addEventListener("click", closeQr);
+
+        const qrWrap = qrLayer.querySelector("[data-qr-wrap]");
+        let qrTimer = null;
+
+        qrWrap.addEventListener("touchstart", (e) => {
+          qrTimer = setTimeout(() => {
+            qrWrap.classList.add("show-download");
+          }, 600);
+        }, { passive: true });
+
+        qrWrap.addEventListener("touchmove", () => {
+          clearTimeout(qrTimer);
+        }, { passive: true });
+
+        qrWrap.addEventListener("touchend", () => {
+          clearTimeout(qrTimer);
+        }, { passive: true });
+
+        qrWrap.addEventListener("touchcancel", () => {
+          clearTimeout(qrTimer);
+        }, { passive: true });
+
+        qrLayer.querySelector(".qr-download-btn").addEventListener("click", (e) => {
+          e.stopPropagation();
+          const src = "./assets/payment-qr.jpg";
+          const link = document.createElement("a");
+          link.href = src;
+          link.download = "payment-qr.jpg";
+          link.click();
+        });
+
+        document.body.appendChild(qrLayer);
       }
 
       function openOrderSheet(item) {
@@ -854,7 +1024,7 @@
             </div>
           `;
           layer.querySelector("[data-pay]").addEventListener("click", () => {
-            window.location.href = shopConfig.paymentTarget;
+            showQrModal();
           });
           layer.querySelector("[data-close]").addEventListener("click", closeSheet);
         });
