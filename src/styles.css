@@ -131,24 +131,27 @@ button {
 
 .language-toggle {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
   align-items: center;
-  gap: 5px;
-  min-width: 62px;
-  height: 46px;
-  padding: 0 10px;
+  justify-items: center;
+  align-content: center;
+  gap: 2px;
+  min-width: 50px;
+  height: 54px;
+  padding: 5px 8px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: oklch(15% 0.014 205 / 92%);
   color: var(--green);
   cursor: pointer;
-  /* 竖向导航布局下，语言按钮与最后一个（Team）按钮对齐 */
-  align-self: flex-end;
+  /* 语言按钮与 Jimmy 按钮垂直居中对齐 */
+  align-self: center;
 }
 
 .language-toggle strong {
   color: oklch(94% 0.012 188);
-  font-size: 0.98rem;
+  font-size: 0.9rem;
   line-height: 1;
 }
 
@@ -1465,12 +1468,12 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
   color: oklch(94% 0.012 188);
   font-size: clamp(1.605rem, 5.35vw, 2.045rem);
-  letter-spacing: 5px;
+  letter-spacing: normal;
   line-height: 1;
 }
 
 [lang="zh-CN"] .team-card h3 {
-  letter-spacing: 5px;
+  letter-spacing: 10px;
 }
 
 .team-card p {
@@ -1687,21 +1690,27 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-top: 9px;
   }
 
+  .header-actions {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+  }
+
   .language-toggle {
-    min-width: 56px;
-    height: 42px;
-    padding-inline: 8px;
+    min-width: 48px;
+    height: 50px;
+    padding: 5px 7px;
     margin-top: 0;
-    align-self: flex-end;
+    align-self: center;
   }
 
   .language-toggle strong {
-    font-size: 0.92rem;
+    font-size: 0.84rem;
   }
 
   .globe-icon {
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
   }
 
   .segmented-control {
