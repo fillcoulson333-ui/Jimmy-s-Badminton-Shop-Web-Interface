@@ -497,7 +497,11 @@ function Header({
 
   return (
     <header className="site-header">
-      <p className="eyebrow header-eyebrow">{t.desk}</p>
+      <p className="eyebrow header-eyebrow">
+        <span className="header-flag" aria-hidden="true" />
+        <span className="header-eyebrow-text">{t.desk}</span>
+        <span className="header-flag" aria-hidden="true" />
+      </p>
 
       <div className="header-main">
         <h1>
@@ -811,6 +815,7 @@ function StringerProfile({ language }: { language: Language }) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [galleryPaused, setGalleryPaused] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
+  const galleryTrackRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -834,6 +839,24 @@ function StringerProfile({ language }: { language: Language }) {
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
     };
+  }, []);
+
+  useEffect(() => {
+    const track = galleryTrackRef.current;
+    if (!track) return;
+
+    function updateGalleryDistance() {
+      const firstSet = track.querySelector<HTMLElement>(".gallery-set");
+      if (!firstSet) return;
+
+      const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || "0") || 0;
+      track.style.setProperty("--gallery-distance", `${firstSet.getBoundingClientRect().width + gap}px`);
+    }
+
+    updateGalleryDistance();
+    window.addEventListener("resize", updateGalleryDistance);
+
+    return () => window.removeEventListener("resize", updateGalleryDistance);
   }, []);
 
   return (
@@ -879,15 +902,32 @@ function StringerProfile({ language }: { language: Language }) {
           <p className="eyebrow">{t.galleryEyebrow}</p>
           <div className="gallery-rail">
             <div
+              ref={galleryTrackRef}
               className={`gallery-track${galleryPaused ? " paused" : ""}`}
               style={{ animationPlayState: galleryPaused ? "paused" : "running" }}
               onClick={() => setGalleryPaused((p) => !p)}
             >
-              {[...shopConfig.profileImages.galleryImages, ...shopConfig.profileImages.galleryImages].map(
-                (image, index) => (
-                  <img src={image.src} alt={image.alt} key={`${image.src}-${index}`} />
-                )
-              )}
+              {[0, 1].map((setIndex) => (
+                <div className="gallery-set" key={setIndex}>
+                  {shopConfig.profileImages.galleryImages.map((image, imageIndex) => (
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      key={`${image.src}-${setIndex}-${imageIndex}`}
+                      onLoad={() => {
+                        const track = galleryTrackRef.current;
+                        const firstSet = track?.querySelector<HTMLElement>(".gallery-set");
+                        if (!track || !firstSet) return;
+                        const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || "0") || 0;
+                        track.style.setProperty(
+                          "--gallery-distance",
+                          `${firstSet.getBoundingClientRect().width + gap}px`
+                        );
+                      }}
+                    />
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </section>

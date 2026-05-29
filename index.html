@@ -8,7 +8,7 @@
       content="Mobile price list for Yonex x Jimmy's Badminton Shop in London."
     />
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./src/styles.css?v=20260529q" />
+    <link rel="stylesheet" href="./src/styles.css?v=20260529r" />
     <title>Jimmy's Badminton Shop</title>
   </head>
   <body>
@@ -560,7 +560,11 @@
         const t = copy[language];
         return `
           <header class="site-header">
-            <p class="eyebrow header-eyebrow">${t.desk}</p>
+            <p class="eyebrow header-eyebrow">
+              <span class="header-flag" aria-hidden="true"></span>
+              <span class="header-eyebrow-text">${t.desk}</span>
+              <span class="header-flag" aria-hidden="true"></span>
+            </p>
             <div class="header-main">
               <h1>
                 <span class="brand-script">Jimmy's</span>
@@ -647,19 +651,25 @@
                     <p class="eyebrow">${t.galleryEyebrow}</p>
                     <div class="gallery-rail">
                       <div class="gallery-track">
-                        ${[...shopConfig.profileImages.galleryImages, ...shopConfig.profileImages.galleryImages]
-                          .map((image, index) => {
-                            const cleanSrc = image.src.split('?')[0];
-                            const filename = cleanSrc.split('/').pop();
-                            return `<div class="gallery-img-wrap" data-gallery-index="${index % shopConfig.profileImages.galleryImages.length}">
-                              <img src="${image.src}" alt="${image.alt}" />
-                              <button class="download-btn" type="button" aria-label="Download image" data-download-src="${cleanSrc}" data-download-filename="${filename}">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                  <path d="M12 2v14m0 0l-5-5m5 5l5-5M4 22h16"/>
-                                </svg>
-                              </button>
-                            </div>`;
-                          })
+                        ${[0, 1]
+                          .map(
+                            (setIndex) => `<div class="gallery-set">
+                              ${shopConfig.profileImages.galleryImages
+                                .map((image, index) => {
+                                  const cleanSrc = image.src.split('?')[0];
+                                  const filename = cleanSrc.split('/').pop();
+                                  return `<div class="gallery-img-wrap" data-gallery-index="${index}">
+                                    <img src="${image.src}" alt="${image.alt}" />
+                                    <button class="download-btn" type="button" aria-label="Download image" data-download-src="${cleanSrc}" data-download-filename="${filename}">
+                                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                        <path d="M12 2v14m0 0l-5-5m5 5l5-5M4 22h16"/>
+                                      </svg>
+                                    </button>
+                                  </div>`;
+                                })
+                                .join("")}
+                            </div>`
+                          )
                           .join("")}
                       </div>
                     </div>
@@ -784,6 +794,25 @@
         function toggleGallery() {
           track.classList.toggle("paused");
         }
+
+        function updateGalleryDistance() {
+          const firstSet = track.querySelector(".gallery-set");
+          if (!firstSet) return;
+          const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || "0") || 0;
+          track.style.setProperty("--gallery-distance", `${firstSet.getBoundingClientRect().width + gap}px`);
+        }
+
+        updateGalleryDistance();
+        window.requestAnimationFrame(updateGalleryDistance);
+        track.querySelectorAll("img").forEach((image) => {
+          if (image.complete) return;
+          image.addEventListener("load", updateGalleryDistance, { once: true });
+        });
+        if (window.galleryDistanceResizeHandler) {
+          window.removeEventListener("resize", window.galleryDistanceResizeHandler);
+        }
+        window.galleryDistanceResizeHandler = updateGalleryDistance;
+        window.addEventListener("resize", window.galleryDistanceResizeHandler);
 
         // 触摸开始：准备识别轻触/长按
         function handleTouchStart(event) {

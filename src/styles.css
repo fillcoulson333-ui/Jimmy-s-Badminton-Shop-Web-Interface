@@ -84,11 +84,33 @@ button {
 }
 
 .header-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  gap: 8px;
   margin: 0;
   text-align: center;
   font-size: 1.05rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   white-space: nowrap;
+}
+
+.header-eyebrow-text {
+  letter-spacing: 3px;
+}
+
+.header-flag {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 1.35em;
+  height: 0.86em;
+  border-radius: 1px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 36'%3E%3CclipPath id='a'%3E%3Cpath d='M0 0h60v36H0z'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='%23012169' d='M0 0h60v36H0z'/%3E%3Cpath stroke='%23fff' stroke-width='7.2' d='m0 0 60 36m0-36L0 36'/%3E%3Cpath stroke='%23C8102E' stroke-width='4.8' d='m0 0 60 36m0-36L0 36'/%3E%3Cpath stroke='%23fff' stroke-width='12' d='M30 0v36M0 18h60'/%3E%3Cpath stroke='%23C8102E' stroke-width='7.2' d='M30 0v36M0 18h60'/%3E%3C/g%3E%3C/svg%3E")
+    center / cover no-repeat;
+  box-shadow: 0 0 0 1px oklch(94% 0.012 188 / 24%);
+  line-height: 1;
 }
 
 .header-main {
@@ -1205,7 +1227,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .gallery-track {
   --gallery-gap: 10px;
-  --gallery-gap-half: 5px;
+  --gallery-distance: calc(50% + 5px);
   display: flex;
   width: max-content;
   gap: var(--gallery-gap);
@@ -1215,6 +1237,12 @@ input[type="number"]::-webkit-inner-spin-button {
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+.gallery-set {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--gallery-gap);
 }
 
 .gallery-track.paused {
@@ -1437,11 +1465,12 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
   color: oklch(94% 0.012 188);
   font-size: clamp(1.605rem, 5.35vw, 2.045rem);
+  letter-spacing: 5px;
   line-height: 1;
 }
 
 [lang="zh-CN"] .team-card h3 {
-  letter-spacing: 0.3125em;
+  letter-spacing: 5px;
 }
 
 .team-card p {
@@ -1592,7 +1621,7 @@ input[type="number"]::-webkit-inner-spin-button {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(calc(-50% - var(--gallery-gap-half)), 0, 0);
+    transform: translate3d(calc(-1 * var(--gallery-distance)), 0, 0);
   }
 }
 
