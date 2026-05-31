@@ -24,8 +24,6 @@
         wechatId: "JIMMY2334",
         xHandle: "JimmyXuan2334",
         paymentTarget: "#付款:HarveySpecter(NOKOJ333)/收款/001",
-        closeSoundSrc: "./assets/SQB.mp4",
-        profileTapSoundSrc: "./assets/jimmy-head-sound.mp3",
         profileImages: {
           heroBackgroundSrc: "./assets/jimmy-hero-source.jpg?v=20260529h",
           heroPersonSrc: "./assets/jimmy-hero-source.jpg?v=20260529j",
@@ -450,67 +448,6 @@
       function renderProfileBody() {
         const t = copy[language];
         return `${t.profileIntroStart}<strong>${t.profileIntroNames}</strong>${t.profileIntroEnd}`;
-      }
-
-      let closeSound = null;
-      let profileTapSound = null;
-      let profileTapPlayToken = 0;
-
-      function playCloseSound() {
-        try {
-          if (!closeSound) {
-            closeSound = new Audio(shopConfig.closeSoundSrc);
-            closeSound.preload = "auto";
-            closeSound.volume = 0.8;
-          }
-
-          closeSound.currentTime = 0;
-          closeSound.play().catch(() => {});
-        } catch {
-        }
-      }
-
-      async function playProfileTapSoundTriple() {
-        const token = ++profileTapPlayToken;
-
-        try {
-          if (!profileTapSound) {
-            profileTapSound = new Audio(shopConfig.profileTapSoundSrc);
-            profileTapSound.preload = "auto";
-            profileTapSound.volume = 0.92;
-          }
-
-          for (let index = 0; index < 1; index += 1) {
-            if (token !== profileTapPlayToken) return;
-
-            await new Promise((resolve, reject) => {
-              const sound = profileTapSound;
-              if (!sound) {
-                resolve();
-                return;
-              }
-
-              const finish = () => {
-                cleanup();
-                resolve();
-              };
-              const fail = () => {
-                cleanup();
-                reject();
-              };
-              const cleanup = () => {
-                sound.removeEventListener("ended", finish);
-                sound.removeEventListener("error", fail);
-              };
-
-              sound.currentTime = 0;
-              sound.addEventListener("ended", finish, { once: true });
-              sound.addEventListener("error", fail, { once: true });
-              sound.play().catch(fail);
-            });
-          }
-        } catch {
-        }
       }
 
       function rateMessage() {
@@ -1040,7 +977,6 @@
 
         function closeSheet() {
           if (layer.classList.contains("closing")) return;
-          playCloseSound();
           layer.classList.add("closing");
           window.setTimeout(() => layer.remove(), 240);
         }

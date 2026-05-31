@@ -279,68 +279,7 @@ function StringIdentity({ item, language }: { item: StringItem; language: Langua
   );
 }
 
-let closeSound: HTMLAudioElement | null = null;
-let profileTapSound: HTMLAudioElement | null = null;
-let profileTapPlayToken = 0;
 
-function playCloseSound() {
-  try {
-    if (!closeSound) {
-      closeSound = new Audio(shopConfig.closeSoundSrc);
-      closeSound.preload = "auto";
-      closeSound.volume = 0.8;
-    }
-
-    closeSound.currentTime = 0;
-    void closeSound.play().catch(() => {});
-  } catch {
-    // Mobile browsers can refuse media playback in some modes; closing should still work.
-  }
-}
-
-async function playProfileTapSoundTriple() {
-  const token = ++profileTapPlayToken;
-
-  try {
-    if (!profileTapSound) {
-      profileTapSound = new Audio(shopConfig.profileTapSoundSrc);
-      profileTapSound.preload = "auto";
-      profileTapSound.volume = 0.92;
-    }
-
-    for (let index = 0; index < 3; index += 1) {
-      if (token !== profileTapPlayToken) return;
-
-      await new Promise<void>((resolve, reject) => {
-        const sound = profileTapSound;
-        if (!sound) {
-          resolve();
-          return;
-        }
-
-        const finish = () => {
-          cleanup();
-          resolve();
-        };
-        const fail = () => {
-          cleanup();
-          reject();
-        };
-        const cleanup = () => {
-          sound.removeEventListener("ended", finish);
-          sound.removeEventListener("error", fail);
-        };
-
-        sound.currentTime = 0;
-        sound.addEventListener("ended", finish, { once: true });
-        sound.addEventListener("error", fail, { once: true });
-        void sound.play().catch(fail);
-      });
-    }
-  } catch {
-    // User-gesture audio can still be blocked in some embedded browsers.
-  }
-}
 
 function useExchangeRate(language: Language): RateState {
   const currency = currencyForLanguage(language);
@@ -663,7 +602,6 @@ function OrderSheet({
 
   function requestClose() {
     if (isClosing) return;
-    playCloseSound();
     setIsClosing(true);
     window.setTimeout(onClose, 240);
   }
@@ -884,7 +822,6 @@ function StringerProfile({ language }: { language: Language }) {
             className="profile-sound-hotspot"
             type="button"
             aria-label="Play Jimmy audio"
-            onClick={playProfileTapSoundTriple}
           />
         </div>
         <div className="profile-copy">

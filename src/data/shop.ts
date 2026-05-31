@@ -22,8 +22,6 @@ export const shopConfig = {
   wechatId: "JIMMY2334",
   xHandle: "JimmyXuan2334",
   paymentTarget: "#付款:HarveySpecter(NOKOJ333)/收款/001",
-  closeSoundSrc: "./assets/SQB.mp4",
-  profileTapSoundSrc: "./assets/jimmy-head-sound.mp3",
   profileImages: {
     heroBackgroundSrc: "./assets/jimmy-hero-bg.jpg?v=20260528b",
     heroPersonSrc: "./assets/jimmy-hero-person.webp?v=20260529a",
